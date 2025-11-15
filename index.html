@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriCook - Masak Cepat, Nutrisi Tepat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(83, 120, 86, 0.8), rgba(83, 120, 86, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f8f9fa" width="1200" height="800"/><g fill="%23537856" opacity="0.1"><circle cx="200" cy="200" r="100"/><circle cx="800" cy="300" r="150"/><circle cx="1000" cy="600" r="80"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: #ffbd59;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #e6a84d;
+            transform: translateY(-2px);
+        }
+        
+        .nav-sticky {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .rating-stars {
+            color: #ffbd59;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-content.active {
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <!-- Logo -->
+                    <img src="/Logo_Nutricook.png" alt="NutriCook Logo" class="w-10 h-10 object-contain" />
+                    <!-- Nama Brand -->
+                    <span class="text-xl font-bold text-white">NutriCook</span>
+                </div>
+
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-white hover:text-green-600 transition-colors">Home</a>
+                    <a href="#about" class="text-white hover:text-green-600 transition-colors">Tentang Kami</a>
+                    <a href="#menu" class="text-white hover:text-green-600 transition-colors">Menu</a>
+                    <a href="#testimonials" class="text-white hover:text-green-600 transition-colors">Testimoni</a>
+                    <a href="#blog" class="text-white hover:text-green-600 transition-colors">Blog</a>
+                    <a href="#contact" class="text-white hover:text-green-600 transition-colors">Kontak</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-green-600">Home</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-green-600">Tentang Kami</a>
+                <a href="#menu" class="block py-2 text-gray-700 hover:text-green-600">Menu</a>
+                <a href="#testimonials" class="block py-2 text-gray-700 hover:text-green-600">Testimoni</a>
+                <a href="#blog" class="block py-2 text-gray-700 hover:text-green-600">Blog</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-green-600">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="slide-in-left">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                        Masak Cepat,<br>
+                        <span class="text-yellow-400">Nutrisi Tepat</span>
+                    </h1>
+                    <p class="text-xl text-white mb-8 opacity-90">
+                        Solusi makanan sehat praktis dengan panduan lengkap dan informasi gizi yang akurat
+                    </p>
+                    <div class="space-y-4 md:space-y-0 md:space-x-4 md:flex">
+                        <button onclick="orderWhatsApp()" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg w-full md:w-auto">
+                            Order Now
+                        </button>
+                        <button onclick="scrollToSection('menu')" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-green-600 transition-all w-full md:w-auto">
+                            Lihat Menu
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="slide-in-right">
+                    <div class="relative">
+                        <div class="relative">
+                            <div class="bg-white rounded-3xl p-8 shadow-2xl">
+                            <!-- Gambar Ayam Pop -->
+                            <img src="/ayam pop.jpg" alt="Ayam Pop" class="w-full object-contain rounded-2xl" />
+                            </div>
+                        <div class="absolute -top-4 -right-4 bg-yellow-400 text-green-800 px-4 py-2 rounded-full font-bold">
+                        Best Seller!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlight Products -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Menu Andalan Kami</h2>
+                <p class="text-xl text-gray-600">Dipilih khusus untuk kebutuhan nutrisi harian Anda</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
+                    <div class="aspect-[1/1] w-full">
+                        <img src="/Foto/ayam_pop.jpg" alt="Perkedel" 
+                        class="w-full h-full object-cover rounded-t-2xl" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Ayam Pop</h3>
+                        <p class="text-gray-600 mb-4">Ayam segar dengan bumbu tradisional, kaya protein dan rendah lemak</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">Rp 20.000</span>
+                            <button onclick="orderProduct('Ayam Pop')" class="btn-primary px-4 py-2 rounded-full">Order</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
+                    <div class="aspect-[1/1] w-full">
+                        <img src="/Foto/salad_sayur.jpg" alt="Perkedel" 
+                        class="w-full h-full object-cover rounded-t-2xl" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Salad Sayur</h3>
+                        <p class="text-gray-600 mb-4">Campuran sayuran segar dengan dressing sehat, tinggi serat</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">Rp 15.000</span>
+                            <button onclick="orderProduct('Salad Sayur')" class="btn-primary px-4 py-2 rounded-full">Order</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
+                    <div class="aspect-[1/1] w-full">
+                        <img src="/Foto/ayam_kalio.jpg" alt="Perkedel" 
+                        class="w-full h-full object-cover rounded-t-2xl" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Ayam Kalio</h3>
+                        <p class="text-gray-600 mb-4">Ayam dengan bumbu kalio khas Minang, penuh rempah dan nutrisi</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">Rp 22.000</span>
+                            <button onclick="orderProduct('Ayam Kalio')" class="btn-primary px-4 py-2 rounded-full">Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Keunggulan NutriCook</h2>
+                <p class="text-xl text-gray-600">Mengapa memilih NutriCook untuk kebutuhan nutrisi Anda?</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Sudah Ditakar Sesuai Kebutuhan</h3>
+                    <p class="text-gray-600">Setiap porsi telah dihitung dengan tepat sesuai kebutuhan kalori dan nutrisi harian</p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Informasi Gizi & Kalori</h3>
+                    <p class="text-gray-600">Dapatkan informasi lengkap tentang kandungan gizi dan kalori setiap menu</p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Panduan Masak via QR Code</h3>
+                    <p class="text-gray-600">Scan QR code untuk mendapatkan panduan memasak lengkap dengan video tutorial</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-green-600">
+        <div class="container mx-auto px-4 text-center">
+            <div class="fade-in">
+                <h2 class="text-4xl font-bold text-white mb-6">Siap Memulai Hidup Sehat?</h2>
+                <p class="text-xl text-white opacity-90 mb-8">Pesan sekarang dan rasakan perbedaannya!</p>
+                <div class="space-y-4 md:space-y-0 md:space-x-6 md:flex justify-center">
+                    <button onclick="orderWhatsApp()" class="bg-yellow-400 hover:bg-yellow-500 text-green-800 px-8 py-4 rounded-full font-bold text-lg transition-all w-full md:w-auto">
+                        Order via WhatsApp
+                    </button>
+                    <button onclick="orderGoogleForm()" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 rounded-full font-bold transition-all w-full md:w-auto">
+                        Pesan via Google Form
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="slide-in-left">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6">Tentang NutriCook</h2>
+                    <div class="space-y-4 text-gray-600">
+                        <p>NutriCook lahir dari ide mahasiswa Universitas Andalas yang peduli dengan kesehatan masyarakat. Kami melihat banyak orang kesulitan menyiapkan makanan sehat karena keterbatasan waktu dan pengetahuan nutrisi.</p>
+                        <p>Dengan dukungan program P2MW (Program Pembinaan Mahasiswa Wirausaha), kami mengembangkan solusi makanan sehat praktis yang tidak hanya lezat, tetapi juga memberikan informasi gizi lengkap dan panduan memasak yang mudah diikuti.</p>
+                        <p>Setiap produk NutriCook dirancang khusus untuk memenuhi kebutuhan nutrisi harian dengan porsi yang tepat, sehingga Anda dapat menjalani gaya hidup sehat tanpa repot.</p>
+                    </div>
+                </div>
+                
+                <!-- Full Image Section -->
+                <div class="slide-in-right">
+                    <div class="rounded-2xl overflow-hidden shadow-lg">
+                        <img 
+                            src="foto/foto_fd.png" 
+                            alt="Foto NutriCook" 
+                            class="w-full h-full object-cover"
+                        >
+                    </div>
+                </div>
+
+                <!-- Vision & Mission -->
+                <div class="mt-20">
+                    <div class="grid md:grid-cols-2 gap-10">
+                        
+                        <!-- Visi -->
+                        <div class="bg-green-50 rounded-2xl p-8 fade-in shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-white text-xl">🌱</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-800">Visi</h3>
+                            </div>
+                            <p class="text-gray-600 leading-relaxed">
+                                Menjadi pelopor solusi makanan sehat praktis di Indonesia yang membantu masyarakat menjalani gaya hidup sehat dengan mudah dan menyenangkan.
+                            </p>
+                        </div>
+
+                        <!-- Misi -->
+                        <div class="bg-yellow-50 rounded-2xl p-8 fade-in shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-white text-xl">🎯</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-800">Misi</h3>
+                            </div>
+                            <ul class="text-gray-600 leading-relaxed space-y-2">
+                                <li>• Menyediakan makanan sehat dengan informasi gizi lengkap</li>
+                                <li>• Memberikan panduan memasak yang mudah diikuti</li>
+                                <li>• Mendukung gaya hidup sehat masyarakat Indonesia</li>
+                                <li>• Menggunakan bahan-bahan berkualitas tinggi</li>
+                                <li>• Memberikan pelayanan terbaik kepada pelanggan</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Certifications -->
+                <div class="mt-20 text-center fade-in">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-8">Didukung Oleh</h3>
+
+                    <div class="flex justify-center items-center gap-10">
+
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <div class="w-28 h-20 flex items-center justify-center">
+                                <img src="Foto/logo_p2mw.png" alt="Logo P2MW" class="object-contain h-full">
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <div class="w-28 h-20 flex items-center justify-center">
+                                <img src="Foto/logo_Unand.png" alt="Logo Unand" class="object-contain h-full">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Menu Lengkap</h2>
+                <p class="text-xl text-gray-600">Pilih menu sesuai kebutuhan nutrisi Anda</p>
+            </div>
+            
+            <!-- Filter -->
+            <div class="flex justify-center mb-12 fade-in">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button onclick="filterMenu('all')" class="filter-btn active px-6 py-2 rounded-full font-semibold transition-all">Semua</button>
+                    <button onclick="filterMenu('defisit')" class="filter-btn px-6 py-2 rounded-full font-semibold transition-all">Defisit</button>
+                    <button onclick="filterMenu('bulking')" class="filter-btn px-6 py-2 rounded-full font-semibold transition-all">Bulking</button>
+                    <button onclick="filterMenu('vegetarian')" class="filter-btn px-6 py-2 rounded-full font-semibold transition-all">Vegetarian</button>
+                </div>
+            </div>
+            
+            <!-- Menu Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="menu-grid">
+
+                <!-- Ayam Pop -->
+                <div class="menu-item card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in" data-category="defisit">
+                    <div class="aspect-[1/1] w-full">
+                        <img src="/Foto/ayam_pop.jpg" alt="Ayam Pop" class="w-full h-full object-cover rounded-t-2xl" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Ayam Pop (Small)</h3>
+                        <p class="text-gray-600 mb-4">Ayam, Air Kelapa, Serai, Lengkuas, Jahe, Daun Jeruk, Daun Salam</p>
+
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-green-600">Rp 20.000</span>
+                            <div class="text-sm text-gray-500">
+                                <span class="bg-green-100 px-2 py-1 rounded">Protein: 25.10</span>
+                                <span class="bg-blue-100 px-2 py-1 rounded ml-1">Kalori: 422.76</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="orderProduct('Ayam Pop')" 
+                                    class="btn-primary w-full py-3 rounded-full font-semibold">
+                                Order Sekarang
+                            </button>
+                            <button onclick="window.location.href='cara_masak_ayam_pop.html'" 
+                                    class="bg-transparent border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all w-full py-3 rounded-full font-semibold">
+                                Cara Masak
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perkedel -->
+                <div class="menu-item card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in" data-category="defisit">
+                    <div class="aspect-[1/1] w-full">
+                        <img src="/Foto/Perkedel.jpg" alt="Perkedel" class="w-full h-full object-cover rounded-t-2xl" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Perkedel (Small)</h3>
+                        <p class="text-gray-600 mb-4">Kentang, Telur, Bawang Putih, Bawang Merah, Seledri, Merica, Garam</p>
+
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-green-600">Rp 15.000</span>
+                            <div class="text-sm text-gray-500">
+                                <span class="bg-green-100 px-2 py-1 rounded">Protein: 13.69g</span>
+                                <span class="bg-blue-100 px-2 py-1 rounded ml-1">Kalori: 220.72</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="orderProduct('Perkedel')" class="btn-primary w-full py-3 rounded-full font-semibold">Order Sekarang</button>
+                            <button onclick="window.location.href='cara_masak_perkedel.html'" 
+                                    class="bg-transparent border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all w-full py-3 rounded-full font-semibold">
+                                Cara Masak
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ayam Bumbu -->
+                <div class="menu-item card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in" data-category="bulking">
+                    <div class="aspect-[1/1] w-full">
+                        <img src="/Foto/ayam_bumbu.jpg" alt="Ayam Bumbu" class="w-full h-full object-cover rounded-t-2xl" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Ayam Bumbu (Small)</h3>
+                        <p class="text-gray-600 mb-4">Ayam, Lengkuas, Kunyit, Jahe, Bawang Putih, Kemiri, Serai</p>
+
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-green-600">Rp 22.000</span>
+                            <div class="text-sm text-gray-500">
+                                <span class="bg-green-100 px-2 py-1 rounded">Protein: 33.53g</span>
+                                <span class="bg-blue-100 px-2 py-1 rounded ml-1">Kalori: 498.74</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="orderProduct('Ayam Bumbu')" class="btn-primary w-full py-3 rounded-full font-semibold">Order Sekarang</button>
+                            <button onclick="window.location.href='cara_masak_ayam_bumbu.html'" 
+                                    class="bg-transparent border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all w-full py-3 rounded-full font-semibold">
+                                Cara Masak
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ayam Kalio -->
+                <div class="menu-item card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in" data-category="bulking">
+                    <div class="aspect-[1/1] w-full">
+                        <img src="/Foto/ayam_kalio.jpg" alt="Ayam Kalio" class="w-full h-full object-cover rounded-t-2xl" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Ayam Kalio (Small)</h3>
+                        <p class="text-gray-600 mb-4">Ayam, Kunyit, Lengkuas, Jahe, Bawang Putih, Kemiri, Santan</p>
+
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-green-600">Rp 25.000</span>
+                            <div class="text-sm text-gray-500">
+                                <span class="bg-green-100 px-2 py-1 rounded">Protein: 31.43g</span>
+                                <span class="bg-blue-100 px-2 py-1 rounded ml-1">Kalori: 631.89</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="orderProduct('Ayam Kalio')" class="btn-primary w-full py-3 rounded-full font-semibold">Order Sekarang</button>
+                            <button onclick="window.location.href='cara_masak_ayam_kalio.html'" 
+                                    class="bg-transparent border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all w-full py-3 rounded-full font-semibold">
+                                Cara Masak
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cah Kangkung -->
+                <div class="menu-item card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in" data-category="vegetarian">
+                    <div class="aspect-[1/1] w-full">
+                        <img src="/Foto/cah_kangkung.jpg" alt="Cah Kangkung" class="w-full h-full object-cover rounded-t-2xl" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Cah Kangkung (Small)</h3>
+                        <p class="text-gray-600 mb-4">Kangkung, Cabai, Bawang Merah, Bawang Putih, Saus Tiram</p>
+
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-green-600">Rp 12.000</span>
+                            <div class="text-sm text-gray-500">
+                                <span class="bg-green-100 px-2 py-1 rounded">Protein: 4.07g</span>
+                                <span class="bg-blue-100 px-2 py-1 rounded ml-1">Kalori: 39.63</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="orderProduct('Cah Kangkung')" class="btn-primary w-full py-3 rounded-full font-semibold">Order Sekarang</button>
+                            <button onclick="window.location.href='cara_masak_cah_kangkung.html'" 
+                                    class="bg-transparent border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all w-full py-3 rounded-full font-semibold">
+                                Cara Masak
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salad Sayur -->
+                <div class="menu-item card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in" data-category="vegetarian">
+                    <div class="aspect-[1/1] w-full">
+                        <img src="/Foto/salad_sayur.jpg" alt="Salad Sayur" class="w-full h-full object-cover rounded-t-2xl" />
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Salad Sayur (Small)</h3>
+                        <p class="text-gray-600 mb-4">Selada, Wortel, Timun, Jagung, Tomat, Salad Dressing</p>
+
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-green-600">Rp 15.000</span>
+                            <div class="text-sm text-gray-500">
+                                <span class="bg-green-100 px-2 py-1 rounded">Protein: 3.25g</span>
+                                <span class="bg-blue-100 px-2 py-1 rounded ml-1">Kalori: 151.70</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="orderProduct('Salad Sayur')" class="btn-primary w-full py-3 rounded-full font-semibold">Order Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Apa Kata Pelanggan</h2>
+                <p class="text-xl text-gray-600">Testimoni dari mereka yang sudah merasakan manfaat NutriCook</p>
+            </div>
+            
+            <!-- Rating Form -->
+            <div class="max-w-md mx-auto mb-12 fade-in">
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Berikan Penilaian Anda</h3>
+                    <form id="rating-form" onsubmit="submitRating(event)">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Rating:</label>
+                            <div class="flex justify-center space-x-2" id="star-rating">
+                                <span class="star cursor-pointer text-3xl text-gray-300" data-rating="1">★</span>
+                                <span class="star cursor-pointer text-3xl text-gray-300" data-rating="2">★</span>
+                                <span class="star cursor-pointer text-3xl text-gray-300" data-rating="3">★</span>
+                                <span class="star cursor-pointer text-3xl text-gray-300" data-rating="4">★</span>
+                                <span class="star cursor-pointer text-3xl text-gray-300" data-rating="5">★</span>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Komentar:</label>
+                            <textarea id="comment" class="w-full p-3 border rounded-lg" rows="3" placeholder="Bagikan pengalaman Anda..."></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Nama:</label>
+                            <input type="text" id="reviewer-name" class="w-full p-3 border rounded-lg" placeholder="Nama Anda">
+                        </div>
+                        <button type="submit" class="btn-primary w-full py-3 rounded-full font-semibold">Kirim Penilaian</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Testimonials Slider -->
+            <div class="grid md:grid-cols-3 gap-8" id="testimonials-grid">
+                <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">A</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Andi Pratama</h4>
+                            <div class="rating-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Menu Ayam Pop-nya enak banget! Praktis dan informasi gizinya lengkap. Sangat membantu program diet saya."</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">S</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sari Dewi</h4>
+                            <div class="rating-stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Sebagai ibu bekerja, NutriCook sangat membantu. QR code untuk panduan masak juga inovatif!"</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">R</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Rizki Hakim</h4>
+                            <div class="rating-stars">★★★★☆</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Salad sayurnya segar dan dressing-nya pas. Cocok untuk yang lagi program cutting."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Blog & Edukasi</h2>
+                <p class="text-xl text-gray-600">Tips dan informasi seputar nutrisi dan gaya hidup sehat</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <article class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Panduan Meal Prep untuk Pemula</h3>
+                        <p class="text-gray-600 mb-4">Tips praktis mempersiapkan makanan sehat untuk seminggu dengan efisien dan hemat waktu.</p>
+                        <button onclick="readArticle('meal-prep')" class="text-green-600 font-semibold hover:text-green-700">Baca Selengkapnya →</button>
+                    </div>
+                </article>
+                
+                <article class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
+                    <div class="h-48 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Menghitung Kebutuhan Kalori Harian</h3>
+                        <p class="text-gray-600 mb-4">Pelajari cara menghitung kebutuhan kalori berdasarkan aktivitas dan tujuan kesehatan Anda.</p>
+                        <button onclick="readArticle('kalori')" class="text-green-600 font-semibold hover:text-green-700">Baca Selengkapnya →</button>
+                    </div>
+                </article>
+                
+                <article class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 11H7v9a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9h-2M12 2a3 3 0 0 1 3 3v1h2a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2h2V5a3 3 0 0 1 3-3h2z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Manfaat Protein untuk Tubuh</h3>
+                        <p class="text-gray-600 mb-4">Kenali pentingnya protein dalam diet harian dan sumber protein terbaik untuk kesehatan optimal.</p>
+                        <button onclick="readArticle('protein')" class="text-green-600 font-semibold hover:text-green-700">Baca Selengkapnya →</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & FAQ -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Hubungi Kami</h2>
+                <p class="text-xl text-gray-600">Ada pertanyaan? Kami siap membantu Anda!</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="slide-in-left">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800">WhatsApp</h3>
+                                <p class="text-gray-600">+62 851-5643-1709</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Email</h3>
+                                <p class="text-gray-600">nutricook01@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800">Instagram</h3>
+                                <p class="text-gray-600">@nutricook_official</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <button onclick="orderWhatsApp()" class="btn-primary px-8 py-4 rounded-full font-semibold text-lg w-full md:w-auto">
+                            Chat WhatsApp Sekarang
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- FAQ -->
+                <div class="slide-in-right">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h3>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg">
+                            <button onclick="toggleAccordion(0)" class="w-full p-4 text-left font-semibold text-gray-800 hover:bg-gray-50 flex justify-between items-center">
+                                Bagaimana cara memesan?
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content p-4 text-gray-600">
+                                Anda bisa memesan melalui WhatsApp atau Google Form. Pilih menu yang diinginkan, lalu klik tombol "Order" untuk diarahkan ke WhatsApp dengan format pesan otomatis.
+                            </div>
+                        </div>
+                        
+                        <div class="border rounded-lg">
+                            <button onclick="toggleAccordion(1)" class="w-full p-4 text-left font-semibold text-gray-800 hover:bg-gray-50 flex justify-between items-center">
+                                Berapa lama waktu pengiriman?
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content p-4 text-gray-600">
+                                Waktu pengiriman biasanya 1-2 hari kerja untuk area Padang dan sekitarnya. Untuk area lain, akan dikonfirmasi saat pemesanan.
+                            </div>
+                        </div>
+                        
+                        <div class="border rounded-lg">
+                            <button onclick="toggleAccordion(2)" class="w-full p-4 text-left font-semibold text-gray-800 hover:bg-gray-50 flex justify-between items-center">
+                                Bagaimana cara pembayaran?
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content p-4 text-gray-600">
+                                Kami menerima pembayaran melalui transfer bank, e-wallet (OVO, GoPay, DANA), dan COD untuk area tertentu.
+                            </div>
+                        </div>
+                        
+                        <div class="border rounded-lg">
+                            <button onclick="toggleAccordion(3)" class="w-full p-4 text-left font-semibold text-gray-800 hover:bg-gray-50 flex justify-between items-center">
+                                Bagaimana cara penyimpanan produk?
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content p-4 text-gray-600">
+                                Produk dapat disimpan di freezer maksimal 2 minggu atau di kulkas biasa maksimal 3 hari. Setiap produk dilengkapi dengan panduan penyimpanan.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">N</span>
+                        </div>
+                        <span class="text-xl font-bold">NutriCook</span>
+                    </div>
+                    <p class="text-gray-400">Masak Cepat, Nutrisi Tepat. Solusi makanan sehat praktis untuk gaya hidup modern.</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold mb-4">Menu</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#home" class="hover:text-white">Home</a></li>
+                        <li><a href="#about" class="hover:text-white">Tentang Kami</a></li>
+                        <li><a href="#menu" class="hover:text-white">Menu</a></li>
+                        <li><a href="#blog" class="hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold mb-4">Kontak</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>WhatsApp: +62 851-5643-1709</li>
+                        <li>Email: nutricook01@gmail.com </li>
+                        <li>Instagram: @nutricook.official</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold mb-4">Ikuti Kami</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700">
+                            <span class="text-sm">IG</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700">
+                            <span class="text-sm">TT</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700">
+                            <span class="text-sm">SF</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 NutriCook.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animations
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Navbar scroll effect
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('nav-sticky');
+            } else {
+                navbar.classList.remove('nav-sticky');
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Order functions
+        function orderWhatsApp() {
+            const message = "Halo NutriCook, saya ingin memesan makanan sehat. Mohon informasi lebih lanjut.";
+            window.open(`https://wa.me/6285156431709?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+        }
+
+        function orderGoogleForm() {
+            window.open('https://forms.google.com/nutricook-order', '_blank', 'noopener,noreferrer');
+        }
+
+        function orderProduct(productName) {
+            const message = `Halo NutriCook, saya ingin pesan ${productName}. Mohon informasi harga dan cara pemesanan.`;
+            window.open(`https://wa.me/6285156431709?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+        }
+
+        // Menu filter
+        function filterMenu(category) {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            filterBtns.forEach(btn => btn.classList.remove('active', 'bg-green-600', 'text-white'));
+            event.target.classList.add('active', 'bg-green-600', 'text-white');
+            
+            // Filter items
+            menuItems.forEach(item => {
+                if (category === 'all' || item.dataset.category.includes(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Rating system
+        let selectedRating = 0;
+        
+        function initRatingSystem() {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    selectedRating = parseInt(this.dataset.rating);
+                    updateStars();
+                });
+                
+                star.addEventListener('mouseover', function() {
+                    const rating = parseInt(this.dataset.rating);
+                    highlightStars(rating);
+                });
+            });
+            
+            document.getElementById('star-rating').addEventListener('mouseleave', function() {
+                updateStars();
+            });
+        }
+        
+        function highlightStars(rating) {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('rating-stars');
+                    star.classList.remove('text-gray-300');
+                } else {
+                    star.classList.remove('rating-stars');
+                    star.classList.add('text-gray-300');
+                }
+            });
+        }
+        
+        function updateStars() {
+            highlightStars(selectedRating);
+        }
+        
+        function submitRating(event) {
+            event.preventDefault();
+            
+            const comment = document.getElementById('comment').value;
+            const name = document.getElementById('reviewer-name').value;
+            
+            if (selectedRating === 0) {
+                alert('Silakan pilih rating terlebih dahulu');
+                return;
+            }
+            
+            if (!comment.trim() || !name.trim()) {
+                alert('Silakan isi semua field');
+                return;
+            }
+            
+            // Add new testimonial
+            const testimonialsGrid = document.getElementById('testimonials-grid');
+            const newTestimonial = document.createElement('div');
+            newTestimonial.className = 'bg-white rounded-2xl shadow-lg p-6 fade-in';
+            newTestimonial.innerHTML = `
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mr-4">
+                        <span class="text-white font-bold">${name.charAt(0).toUpperCase()}</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800">${name}</h4>
+                        <div class="rating-stars">${'★'.repeat(selectedRating)}${'☆'.repeat(5-selectedRating)}</div>
+                    </div>
+                </div>
+                <p class="text-gray-600">"${comment}"</p>
+            `;
+            
+            testimonialsGrid.appendChild(newTestimonial);
+            
+            // Reset form
+            document.getElementById('rating-form').reset();
+            selectedRating = 0;
+            updateStars();
+            
+            alert('Terima kasih atas penilaian Anda!');
+        }
+
+        // Accordion
+        function toggleAccordion(index) {
+            const contents = document.querySelectorAll('.accordion-content');
+            const buttons = document.querySelectorAll('.accordion-content').length;
+            
+            contents[index].classList.toggle('active');
+            
+            // Rotate arrow
+            const arrow = event.currentTarget.querySelector('svg');
+            arrow.classList.toggle('rotate-180');
+        }
+
+        // Blog functions
+        function readArticle(articleId) {
+            alert(`Membuka artikel: ${articleId}. Fitur blog akan segera tersedia!`);
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            observeElements();
+            initRatingSystem();
+            
+            // Set initial filter button state
+            document.querySelector('.filter-btn').classList.add('bg-green-600', 'text-white');
+            
+            // Event listeners
+            window.addEventListener('scroll', handleNavbarScroll);
+            document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+            
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'985aa461d754f888',t:'MTc1ODk3MjM0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
